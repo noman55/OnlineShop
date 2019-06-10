@@ -1,0 +1,35 @@
+
+<head>
+    <style>
+
+    </style>
+</head>
+{% extends 'base.html' %}
+{% block content %}
+<form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search' %}">
+      <input class="form-control mr-sm-2" name="q" value="{{ request.GET.q }}" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</form>
+<div class="container">
+<div class="row">
+    {% for product in products %}
+    <div class="col">
+        <div class="card" style="width: 16rem;">
+            <img src="{{ product.image_url.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price }}</p>
+                <p class="card-text">posted on {{ product.date_posted|date:"F d, Y" }}</p>
+                <p class="card-text">
+                      Owner : {{ product.uploader }}
+                </p>
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+                 <a href="{% url 'product-detail' product.id %}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    </div>
+{% endblock %}

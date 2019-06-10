@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>delete product</h2>
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            <h2> Are You Sure, You Want To Delete This Product</h2>
+            {% csrf_token %}
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'product-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

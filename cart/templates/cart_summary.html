@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<div class="row">
+    {% for item in order.get_cart_items %}
+    <div class="col">
+        <div class="card" style="width: 16rem;">
+            <img src="{{ item.product.image_url.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.product.name }}</h5>
+                <p class="card-text">{{ item.product.price }}</p>
+                <p class="card-text">posted on {{ item.product.date_posted|date:"F d, Y" }}</p>
+                <p class="card-text">
+                      Owner : {{ item.product.uploader }}
+                </p>
+                <a href="{% url 'delete_item' item.product.id %}" class="btn btn-danger">Delete From Cart</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

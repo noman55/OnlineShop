@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% if object.uploader == user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'product-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'product-delete' object.id %}">Delete</a>
+          </div>
+{% endif %}
+  <div class="col">
+        <div class="card" style="width: 16rem;">
+            <img src="{{ product.image_url.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ object.name }}</h5>
+                <p class="card-text">{{ object.price }}</p>
+                <p class="card-text">posted on {{ object.date_posted|date:"F d, Y" }}</p>
+                <p class="card-text">
+                      Uploaded by {{ product.uploader }} contact the owner{% if user.is_authenticated %}
+                                                                    {{ object.uploader.email }}
+                                                              {% endif %}
+                </p>
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+ </div>
+{% endblock content %}
